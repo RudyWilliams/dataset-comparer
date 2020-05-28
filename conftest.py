@@ -38,3 +38,19 @@ def pandas_namedtuple():
         "Pandas",
         ["Index", "last_name", "first_name", "intake_dt", "exit_dt", "release_reason"],
     )
+
+
+@pytest.fixture
+def one_to_one_unmatchable_obj():
+    data_path = (
+        Path(__file__).resolve().parent
+        / "tests"
+        / "data"
+        / "unmatchable"
+        / "one-to-one"
+    )
+    d1_path = data_path / "one_to_one-A1.csv"
+    d2_path = data_path / "one_to_one-A2.csv"
+    comparer = jp.Comparer(path1=d1_path, path2=d2_path)
+    comparer.set_dataframes(parse_dates=["intake_dt", "exit_dt"])
+    return comparer

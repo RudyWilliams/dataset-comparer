@@ -82,3 +82,69 @@ def test_compare_dataframes_1to1_mismatch_columns_ignored(one_to_one_mismatch_ob
         group_on=["last_name", "first_name"], compare_on=["intake_dt"],
     )
     assert not result
+
+
+def test_compare_dataframes_1to1_unmatchable_with_mismatch(
+    one_to_one_unmatchable_obj, pandas_namedtuple
+):
+    comparer = one_to_one_unmatchable_obj
+    result = comparer.compare_dataframes(
+        group_on=["last_name", "first_name"],
+        compare_on=["intake_dt", "exit_dt", "release_reason"],
+    )
+    truth = {
+        pandas_namedtuple(
+            Index=0,
+            last_name="Houston",
+            first_name="Dennis",
+            intake_dt=pd.Timestamp("2018-01-20"),
+            exit_dt=pd.Timestamp("2019-01-12"),
+            release_reason="c",
+        ),
+        pandas_namedtuple(
+            Index=6,
+            last_name="Perez",
+            first_name="Denise",
+            intake_dt=pd.Timestamp("2019-06-18"),
+            exit_dt=pd.Timestamp("2019-08-03"),
+            release_reason="c",
+        ),
+        pandas_namedtuple(
+            Index=9,
+            last_name="Johnson",
+            first_name="Anthony",
+            intake_dt=pd.Timestamp("2019-07-18"),
+            exit_dt=pd.Timestamp("2019-03-31"),
+            release_reason="c",
+        ),
+    }
+    assert set(result) == truth
+
+
+def test_compare_dataframes_1to1_unmatchable_only(
+    one_to_one_unmatchable_obj, pandas_namedtuple
+):
+    # using the feature that we can ignore columns
+    comparer = one_to_one_unmatchable_obj
+    result = comparer.compare_dataframes(
+        group_on=["last_name", "first_name"], compare_on=["exit_dt", "release_reason"],
+    )
+    truth = {
+        pandas_namedtuple(
+            Index=0,
+            last_name="Houston",
+            first_name="Dennis",
+            intake_dt=pd.Timestamp("2018-01-20"),
+            exit_dt=pd.Timestamp("2019-01-12"),
+            release_reason="c",
+        ),
+        pandas_namedtuple(
+            Index=6,
+            last_name="Perez",
+            first_name="Denise",
+            intake_dt=pd.Timestamp("2019-06-18"),
+            exit_dt=pd.Timestamp("2019-08-03"),
+            release_reason="c",
+        ),
+    }
+    assert set(result) == truth
