@@ -11,15 +11,17 @@ class Comparer:
         # self.handcheck = None
 
     def set_dataframes(self, **kwargs):
+        # this is fine bc the dataframes are required to be converted to the same
+        # column names before hand
         self.df1 = pd.read_csv(self.path1, **kwargs)
         self.df2 = pd.read_csv(self.path2, **kwargs)
         return self
 
-    def compare_dataframes(self, match_on, compare_on):
+    def compare_dataframes(self, group_on, compare_on):
         n_compare_columns = len(compare_on)
         same_columns = [f"_same_{c}" for c in compare_on]
-        df1_groups = tuple(self.df1.groupby(match_on))
-        df2_groups_dict = dict(tuple(self.df2.groupby(match_on)))
+        df1_groups = tuple(self.df1.groupby(group_on))
+        df2_groups_dict = dict(tuple(self.df2.groupby(group_on)))
 
         handcheck = []
 
@@ -56,7 +58,7 @@ if __name__ == "__main__":
     c = Comparer(datapath1, datapath2)
     c.set_dataframes(parse_dates=["intake_dt", "exit_dt"])
     handcheck = c.compare_dataframes(
-        match_on=["last_name", "first_name"],
+        group_on=["last_name", "first_name"],
         compare_on=["intake_dt", "exit_dt", "release_reason"],
     )
 
