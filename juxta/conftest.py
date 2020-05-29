@@ -1,7 +1,7 @@
 from collections import namedtuple
 from pathlib import Path
 import pytest
-import juxta.pose as jp
+from juxta.pose.comparer import Comparer
 
 
 @pytest.fixture
@@ -15,7 +15,7 @@ def one_to_one_all_match_obj():
     )
     d1_path = data_path / "one_to_one-A1.csv"
     d2_path = d1_path
-    comparer = jp.Comparer(path1=d1_path, path2=d2_path)
+    comparer = Comparer(path1=d1_path, path2=d2_path)
     comparer.set_dataframes(parse_dates=["intake_dt", "exit_dt"])
     return comparer
 
@@ -27,7 +27,7 @@ def one_to_one_mismatch_obj():
     )
     d1_path = data_path / "one_to_one-A1.csv"
     d2_path = data_path / "one_to_one-A2.csv"
-    comparer = jp.Comparer(path1=d1_path, path2=d2_path)
+    comparer = Comparer(path1=d1_path, path2=d2_path)
     comparer.set_dataframes(parse_dates=["intake_dt", "exit_dt"])
     return comparer
 
@@ -51,6 +51,6 @@ def one_to_one_unmatchable_obj():
     )
     d1_path = data_path / "one_to_one-A1.csv"
     d2_path = data_path / "one_to_one-A2.csv"
-    comparer = jp.Comparer(path1=d1_path, path2=d2_path)
+    comparer = Comparer(path1=d1_path, path2=d2_path)
     comparer.set_dataframes(parse_dates=["intake_dt", "exit_dt"])
     return comparer
