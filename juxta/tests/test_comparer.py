@@ -281,7 +281,16 @@ def test_compare_dataframes_1to1_and_MtoM_unmatchable_shuffled(
     assert set(result) == set(truth)
 
 
-# use the fixtures already created to test the data is stored in df as expected
+def test_to_df_empty_handcheck(shuffled_one_to_one_all_match_obj):
+    comparer = shuffled_one_to_one_all_match_obj
+    comparer.compare_dataframes(
+        group_on=["last_name", "first_name"], compare_on=["intake_dt", "release_reason"]
+    ).results_to_df()
+    results_df = comparer.results_df
+    truth_df = pd.DataFrame()
+    assert results_df.equals(truth_df)
+
+
 def test_to_df_no_kwargs(one_to_one_mismatch_obj, truth_df_1):
     comparer = one_to_one_mismatch_obj
     comparer.compare_dataframes(
