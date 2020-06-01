@@ -1,0 +1,3 @@
+## juxta
+
+This is a package that is useful for comparing dataframes. For work, I need to make sure data that for the same "thing", but from different sources, are consistent. If an observation is inconsistent between the two data sources, the observation is flagged for human intervention. Using this software means that a human only needs to check, a potentially much smaller, subset of the datasets; this depends on how consistent the data is between the two sources. 
