@@ -1,8 +1,13 @@
-from collections import namedtuple
+from pathlib import Path
+import pandas as pd
 
-Pandas = namedtuple(
-    "Ps", ["last_name", "first_name", "intake_dt", "exit_dt", "release_reason"]
+path = (
+    Path("juxta")
+    / "tests"
+    / "data"
+    / "no-mismatches"
+    / "one-to-one"
+    / "one_to_one-A1.csv"
 )
-
-p = Pandas(1, 2, 3, 4, 5)
-print(p)
+df = pd.read_csv(path)
+print(df)
