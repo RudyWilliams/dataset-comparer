@@ -69,9 +69,9 @@ def test_compare_dataframes_1to1_mismatch_group_on_two_match_on_rest(
         compare_on=["intake_dt", "exit_dt", "release_reason"],
     )
     result = comparer.handcheck
-    truth = set(namedtuple_list_1)
+    truth = namedtuple_list_1
     # do not care about order
-    assert set(result) == truth
+    assert set(result) == set(truth)
 
 
 def test_compare_dataframes_1to1_mismatch_group_on_two_match_on_rest_shuffled(
@@ -223,4 +223,25 @@ def test_compare_dataframes_1to1_and_MtoM_unmatchable_shuffled(
     assert set(result) == set(truth)
 
 
-# def test_to_df_no_kwargs()
+# use the fixtures already created to test the data is stored in df as expected
+def test_to_df_no_kwargs(one_to_one_mismatch_obj, truth_df_1):
+    comparer = one_to_one_mismatch_obj
+    comparer.compare_dataframes(
+        group_on=["last_name", "first_name"],
+        compare_on=["intake_dt", "exit_dt", "release_reason"],
+    ).results_to_df()
+    results_df = comparer.results_df.sort_values(by="Index").reset_index(drop=True)
+    truth_df = truth_df_1.sort_values(by="Index").reset_index(drop=True)
+    assert results_df.equals(truth_df)
+
+
+def test_to_df_with_kwargs(one_to_one_mismatch_obj, truth_df_1):
+    comparer = one_to_one_mismatch_obj
+    comparer.compare_dataframes(
+        group_on=["last_name", "first_name"],
+        compare_on=["intake_dt", "exit_dt", "release_reason"],
+    ).results_to_df(columns=["c1", "c2", "c3", "c4", "c5", "c6"])
+    results_df = comparer.results_df.sort_values(by="c1").reset_index(drop=True)
+    truth_df = truth_df_1.sort_values(by="Index").reset_index(drop=True)
+    truth_df.columns = ["c1", "c2", "c3", "c4", "c5", "c6"]
+    assert results_df.equals(truth_df)

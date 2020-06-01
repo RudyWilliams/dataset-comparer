@@ -361,6 +361,20 @@ def namedtuple_list_6():
     ]
 
 
+@pytest.fixture
+def truth_df_1():
+    return pd.DataFrame(
+        {
+            "Index": [3, 7],
+            "last_name": ["Smith", "Landry"],
+            "first_name": ["Jonathan", "Kristina"],
+            "intake_dt": [pd.Timestamp("2018-01-08"), pd.Timestamp("2018-06-18")],
+            "exit_dt": [pd.Timestamp("2019-10-24"), pd.Timestamp("2019-04-01")],
+            "release_reason": ["c", "a"],
+        }
+    )
+
+
 if __name__ == "__main__":
     comparer = shuffled_many_to_many_unmatchable_obj()
     print(comparer.df1)
