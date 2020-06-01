@@ -46,20 +46,51 @@ class Comparer:
                     print(f"{identifier} did NOT have matching record in data sets.")
                     handcheck.append(obs)
 
-        return handcheck
+        self.handcheck = handcheck
+
+        return self
+
+    def results_to_df(self, **kwargs):
+        self.results_df = pd.DataFrame(self.handcheck, **kwargs)
+        return self
+
+    def results_to_csv(self, output_path, **kwargs):
+        if hasattr(self, "results_df"):
+            self.results_df.to_csv(output_path, **kwargs)
+        else:
+            # using this implementation means cannot add args to the df build part
+            pd.DataFrame(self.handcheck).to_csv(output_path, **kwargs)
+        return self
+
+    def results_to_excel(self, output_path, **kwargs):
+        if hasattr(self, "results_df"):
+            self.results_df.to_excel(output_path, **kwargs)
+        else:
+            # using this implementation means cannot add args to the df build part
+            pd.DataFrame(self.handcheck).to_excel(output_path, **kwargs)
+        return self
 
 
 if __name__ == "__main__":
 
-    datapath1 = os.path.join(
-        "tests", "data", "unmatchable", "one2one-A1.csv"
-    )  # config (dev vs production like with snapshot software)
-    datapath2 = os.path.join("tests", "data", "unmatchable", "one2one-A2.csv")  # config
-    c = Comparer(datapath1, datapath2)
-    c.set_dataframes(parse_dates=["intake_dt", "exit_dt"])
-    handcheck = c.compare_dataframes(
+    from pathlib import Path
+
+    print(Path(__file__).resolve().parent.parent)
+    data_path = (
+        Path(__file__).resolve().parent.parent
+        / "tests"
+        / "data"
+        / "unmatchable"
+        / "many-to-many"
+    )
+    d1_path = data_path / "many_to_many-A1.csv"
+    d2_path = data_path / "many_to_many-A2-shuffled.csv"
+    comparer = Comparer(path1=d1_path, path2=d2_path)
+    comparer.set_dataframes(parse_dates=["intake_dt", "exit_dt"]).compare_dataframes(
         group_on=["last_name", "first_name"],
         compare_on=["intake_dt", "exit_dt", "release_reason"],
     )
 
-    print(pd.DataFrame(handcheck))
+    comparer.results_to_excel("test.xlsx", index=False)
+    # original index still shows up bc it is useful for referencing the data
+    # but the index for the results df is not useful and is not written to the file

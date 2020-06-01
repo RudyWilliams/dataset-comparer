@@ -1,0 +1,6 @@
+Faker~=4.1.0
+numpy~=1.18.4
+openpyxl~=3.0.3
+pandas~=1.0.3
+pytest~=5.4.2
+xlrd~=1.2.0
