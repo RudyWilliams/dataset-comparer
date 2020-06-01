@@ -23,7 +23,7 @@ def one_to_one_all_match_obj():
     )
     d1_path = data_path / "one_to_one-A1.csv"
     d2_path = d1_path
-    comparer = Comparer(path1=d1_path, path2=d2_path)
+    comparer = Comparer(dataset1=d1_path, dataset2=d2_path)
     comparer.set_dataframes(parse_dates=["intake_dt", "exit_dt"])
     return comparer
 
@@ -40,7 +40,7 @@ def shuffled_one_to_one_all_match_obj():
     )
     d1_path = data_path / "one_to_one-A1.csv"
     d2_path = data_path / "one_to_one-A1-shuffled.csv"
-    comparer = Comparer(path1=d1_path, path2=d2_path)
+    comparer = Comparer(dataset1=d1_path, dataset2=d2_path)
     comparer.set_dataframes(parse_dates=["intake_dt", "exit_dt"])
     return comparer
 
@@ -57,7 +57,7 @@ def one_to_one_mismatch_obj():
     )
     d1_path = data_path / "one_to_one-A1.csv"
     d2_path = data_path / "one_to_one-A2.csv"
-    comparer = Comparer(path1=d1_path, path2=d2_path)
+    comparer = Comparer(dataset1=d1_path, dataset2=d2_path)
     comparer.set_dataframes(parse_dates=["intake_dt", "exit_dt"])
     return comparer
 
@@ -74,7 +74,7 @@ def shuffled_one_to_one_mismatch_obj():
     )
     d1_path = data_path / "one_to_one-A1.csv"
     d2_path = data_path / "one_to_one-A2-shuffled.csv"
-    comparer = Comparer(path1=d1_path, path2=d2_path)
+    comparer = Comparer(dataset1=d1_path, dataset2=d2_path)
     comparer.set_dataframes(parse_dates=["intake_dt", "exit_dt"])
     return comparer
 
@@ -99,7 +99,7 @@ def one_to_one_unmatchable_obj():
     )
     d1_path = data_path / "one_to_one-A1.csv"
     d2_path = data_path / "one_to_one-A2.csv"
-    comparer = Comparer(path1=d1_path, path2=d2_path)
+    comparer = Comparer(dataset1=d1_path, dataset2=d2_path)
     comparer.set_dataframes(parse_dates=["intake_dt", "exit_dt"])
     return comparer
 
@@ -116,7 +116,7 @@ def shuffled_one_to_one_unmatchable_obj():
     )
     d1_path = data_path / "one_to_one-A1.csv"
     d2_path = data_path / "one_to_one-A2-shuffled.csv"
-    comparer = Comparer(path1=d1_path, path2=d2_path)
+    comparer = Comparer(dataset1=d1_path, dataset2=d2_path)
     comparer.set_dataframes(parse_dates=["intake_dt", "exit_dt"])
     return comparer
 
@@ -133,7 +133,7 @@ def many_to_many_all_match_obj():
     )
     d1_path = data_path / "many_to_many-A1.csv"
     d2_path = d1_path
-    comparer = Comparer(path1=d1_path, path2=d2_path)
+    comparer = Comparer(dataset1=d1_path, dataset2=d2_path)
     comparer.set_dataframes(parse_dates=["intake_dt", "exit_dt"])
     return comparer
 
@@ -150,7 +150,7 @@ def shuffled_many_to_many_all_match_obj():
     )
     d1_path = data_path / "many_to_many-A1.csv"
     d2_path = data_path / "many_to_many-A1-shuffled.csv"
-    comparer = Comparer(path1=d1_path, path2=d2_path)
+    comparer = Comparer(dataset1=d1_path, dataset2=d2_path)
     comparer.set_dataframes(parse_dates=["intake_dt", "exit_dt"])
     return comparer
 
@@ -167,7 +167,7 @@ def shuffled_many_to_many_mismatch_obj():
     )
     d1_path = data_path / "many_to_many-A1.csv"
     d2_path = data_path / "many_to_many-A2-shuffled.csv"
-    comparer = Comparer(path1=d1_path, path2=d2_path)
+    comparer = Comparer(dataset1=d1_path, dataset2=d2_path)
     comparer.set_dataframes(parse_dates=["intake_dt", "exit_dt"])
     return comparer
 
@@ -184,7 +184,7 @@ def shuffled_many_to_many_unmatchable_obj():
     )
     d1_path = data_path / "many_to_many-A1.csv"
     d2_path = data_path / "many_to_many-A2-shuffled.csv"
-    comparer = Comparer(path1=d1_path, path2=d2_path)
+    comparer = Comparer(dataset1=d1_path, dataset2=d2_path)
     comparer.set_dataframes(parse_dates=["intake_dt", "exit_dt"])
     return comparer
 
