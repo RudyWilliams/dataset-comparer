@@ -26,6 +26,8 @@ class Prepper(Base):
 
     def map_to_ds1_column_names(self, mapper):
         """just map the second dataset to the first dataset's column names"""
+        if not mapper:
+            return self
         df2 = self.df2
         df2 = df2.rename(mapper=mapper, axis="columns")
         self.df2 = df2
