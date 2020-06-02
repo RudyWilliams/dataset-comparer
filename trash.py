@@ -1,22 +1,21 @@
-from pathlib import Path
-import pandas as pd
-from juxta.pose.comparer import Comparer
+class Sample:
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
 
-path1 = (
-    Path("juxta") / "tests" / "data" / "mismatches" / "one-to-one" / "one_to_one-A1.csv"
-)
-path2 = (
-    Path("juxta")
-    / "tests"
-    / "data"
-    / "mismatches"
-    / "one-to-one"
-    / "one_to_one-A2-shuffled.csv"
-)
+    def reassign(self, new_a, new_b):
+        a = self.a
+        b = self.b
+
+        a = new_a
+        b = new_b
+
+        self.a = a
+        self.b = b
+        return self
 
 
-comparer = Comparer(path1, path2)
-comparer.set_dataframes(parse_dates=["intake_dt", "exit_dt"]).compare_dataframes(
-    group_on=["last_name", "first_name"],
-    compare_on=["intake_dt", "exit_dt", "release_reason"],
-).results_to_df().results_to_csv("set_intermediate_df_test.csv", index=False)
+if __name__ == "__main__":
+    s = Sample(5, 8)
+    s.reassign(15, 28)
+    print(s.a, s.b)
