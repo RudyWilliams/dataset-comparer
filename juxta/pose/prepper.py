@@ -17,7 +17,7 @@ class Prepper(Base):
         df2 = self.df2
 
         df1 = df1.loc[:, ds1_columns].copy()
-        df2 = df1.loc[:, ds2_columns].copy()
+        df2 = df2.loc[:, ds2_columns].copy()
 
         self.df1 = df1
         self.df2 = df2

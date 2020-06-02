@@ -1,21 +1,56 @@
-class Sample:
-    def __init__(self, a, b):
-        self.a = a
-        self.b = b
+import pandas as pd
 
-    def reassign(self, new_a, new_b):
-        a = self.a
-        b = self.b
+# df = pd.DataFrame(
+#     {
+#         "last_name": ["Williams", "Smith", "Perez"],
+#         "first_name": ["John", "Alex", "Samantha"],
+#         "id": [11, 22, 33],
+#         "SON": ["000-00-0000", "111-11-1111", "222-22-2222"],
+#         "program": ["a", "a", "b"],
+#         "agency": ["cs", "cs", "cs"],
+#         "intake_dt": [
+#             pd.Timestamp("2018-12-01"),
+#             pd.Timestamp("2018-05-12"),
+#             pd.Timestamp("2018-07-31"),
+#         ],
+#         "exit_dt": [
+#             pd.Timestamp("2019-01-25"),
+#             pd.Timestamp("2019-04-01"),
+#             pd.Timestamp("2019-11-14"),
+#         ],
+#         "release_reason": ["a" "b", "a"],
+#         "DOB": [
+#             pd.Timestamp("2000-01-01"),
+#             pd.Timestamp("2000-01-01"),
+#             pd.Timestamp("2000-01-01"),
+#         ],
+#     }
+# )
 
-        a = new_a
-        b = new_b
+data = {
+    "last_name": ["Williams", "Smith", "Perez"],
+    "first_name": ["John", "Alex", "Samantha"],
+    "id": [11, 22, 33],
+    "SON": ["000-00-0000", "111-11-1111", "222-22-2222"],
+    "program": ["a", "a", "b"],
+    "agency": ["cs", "cs", "cs"],
+    "intake_dt": [
+        pd.Timestamp("2018-12-01"),
+        pd.Timestamp("2018-05-12"),
+        pd.Timestamp("2018-07-31"),
+    ],
+    "exit_dt": [
+        pd.Timestamp("2019-01-25"),
+        pd.Timestamp("2019-04-01"),
+        pd.Timestamp("2019-11-14"),
+    ],
+    "release_reason": ["a", "b", "a"],
+    "DOB": [
+        pd.Timestamp("2000-01-01"),
+        pd.Timestamp("2000-01-01"),
+        pd.Timestamp("2000-01-01"),
+    ],
+}
 
-        self.a = a
-        self.b = b
-        return self
-
-
-if __name__ == "__main__":
-    s = Sample(5, 8)
-    s.reassign(15, 28)
-    print(s.a, s.b)
+for key, value in data.items():
+    print(f"{key} : {len(value)}")

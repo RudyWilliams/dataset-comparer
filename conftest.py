@@ -375,8 +375,93 @@ def truth_df_1():
     )
 
 
+@pytest.fixture
+def input_df_1():
+    return pd.DataFrame(
+        {
+            "last_name": ["Williams", "Smith", "Perez"],
+            "first_name": ["John", "Alex", "Samantha"],
+            "id": [11, 22, 33],
+            "SON": ["000-00-0000", "111-11-1111", "222-22-2222"],
+            "program": ["a", "a", "b"],
+            "agency": ["cs", "cs", "cs"],
+            "intake_dt": [
+                pd.Timestamp("2018-12-01"),
+                pd.Timestamp("2018-05-12"),
+                pd.Timestamp("2018-07-31"),
+            ],
+            "exit_dt": [
+                pd.Timestamp("2019-01-25"),
+                pd.Timestamp("2019-04-01"),
+                pd.Timestamp("2019-11-14"),
+            ],
+            "release_reason": ["a", "b", "a"],
+            "DOB": [
+                pd.Timestamp("2000-01-01"),
+                pd.Timestamp("2000-01-01"),
+                pd.Timestamp("2000-01-01"),
+            ],
+        }
+    )
+
+
+@pytest.fixture
+def input_df_2():
+    return pd.DataFrame(
+        {
+            "last_name": ["Williams", "Smith", "Perez"],
+            "first_name": ["John", "Alex", "Samantha"],
+            "agency": ["cs", "cs", "cs"],
+            "intake_dt": [
+                pd.Timestamp("2018-12-01"),
+                pd.Timestamp("2018-05-12"),
+                pd.Timestamp("2018-07-31"),
+            ],
+            "exit_dt": [
+                pd.Timestamp("2019-01-25"),
+                pd.Timestamp("2019-04-01"),
+                pd.Timestamp("2019-11-14"),
+            ],
+            "release_reason": ["a", "b", "a"],
+            "DOB": [
+                pd.Timestamp("2000-01-01"),
+                pd.Timestamp("2000-01-01"),
+                pd.Timestamp("2000-01-01"),
+            ],
+        }
+    )
+
+
+@pytest.fixture
+def input_df_3():
+    return pd.DataFrame(
+        {
+            "lastname": ["Williams", "Smith", "Perez"],
+            "firstname": ["John", "Alex", "Samantha"],
+            "Agency": ["cs", "cs", "cs"],
+            "intake_date": [
+                pd.Timestamp("2018-12-01"),
+                pd.Timestamp("2018-05-12"),
+                pd.Timestamp("2018-07-31"),
+            ],
+            "exit_date": [
+                pd.Timestamp("2019-01-25"),
+                pd.Timestamp("2019-04-01"),
+                pd.Timestamp("2019-11-14"),
+            ],
+            "discharge": ["a", "b", "a"],
+            "DOB": [
+                pd.Timestamp("2000-01-01"),
+                pd.Timestamp("2000-01-01"),
+                pd.Timestamp("2000-01-01"),
+            ],
+        }
+    )
+
+
 if __name__ == "__main__":
-    comparer = shuffled_many_to_many_unmatchable_obj()
-    print(comparer.df1)
-    print("------------------")
-    print(comparer.df2)
+    print(
+        input_df_3()
+        .loc[:, ["lastname", "firstname", "intake_date", "exit_date", "discharge"]]
+        .columns
+    )
