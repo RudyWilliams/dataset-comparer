@@ -1,4 +1,10 @@
-__pycache__
+__pycache__/
+.pytest_cache/
 juxta-env/
 .vscode/
 notes.md
+
+#build stuff
+dist/
+build/
+juxta.egg-info/
